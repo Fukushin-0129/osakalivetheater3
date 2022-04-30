@@ -1,3 +1,4 @@
+
 name: osakalivetheater3
 description: A new Flutter project.
 
@@ -30,10 +31,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  firebase_core: ^1.15.0
+  firebase_analytics: ^9.1.6
+  firebase_auth: ^3.3.16
+  cloud_firestore: ^3.1.13
+
 
 dev_dependencies:
   flutter_test:
