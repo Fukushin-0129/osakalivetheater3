@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "772233595402",
+    "project_id": "osakalivetheater3app",
+    "storage_bucket": "osakalivetheater3app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772233595402:android:62cdb99cccdcd6a8ed6df3",
+        "android_client_info": {
+          "package_name": "com.example.osakalivetheater3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772233595402-1tsq7p9eeb0epcnt3kki6dqfmtslotel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDs2aTmkxcDdb_YhUNKOIyppaW4bx9FzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772233595402-1tsq7p9eeb0epcnt3kki6dqfmtslotel.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "772233595402-ej42n5gu9sq4gnmt2unr59g7al66s35j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.osakalivetheater3"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
