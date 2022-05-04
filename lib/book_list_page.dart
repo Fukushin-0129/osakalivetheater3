@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class BookListPage extends StatelessWidget {
   final Stream<QuerySnapshot> _usersStream =
-  FirebaseFirestore.instance.collection('books').snapshots();
+  FirebaseFirestore.instance.collection('lessons').snapshots();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('本一覧'),
+        title: Text('テクニック一覧'),
       ),
       body: Center(
         child: StreamBuilder<QuerySnapshot>(
@@ -25,8 +25,8 @@ class BookListPage extends StatelessWidget {
                 Map<String, dynamic> data =
                 document.data() as Map<String, dynamic>;
                 return ListTile(
-                  title: Text(data['title']),
-                  subtitle: Text(data['author']),
+                  title: Text(data['tech']),
+                  subtitle: Text(data['stage']),
                 );
               }).toList(),
             );
