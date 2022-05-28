@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 import 'package:provider/provider.dart';
 
 class BookListPage extends StatelessWidget {
@@ -23,7 +24,7 @@ class BookListPage extends StatelessWidget {
             final List<Widget> widgets = lessons
                 .map(
                   (lesson)=>ListTile(
-                    tech:Text(lesson.tech),
+                    title:Text(lesson.tech),
                     stage:Text(lesson.stage),
                   ),
             )
