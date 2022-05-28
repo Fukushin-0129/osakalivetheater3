@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart';
-import 'book_list_page.dart';
+import 'teck_list/lesson_list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BookListSample',
-      home: BookListPage(),
+      title: 'lessonListSample',
+      home: LessonListPage(),
     );
   }
 }
