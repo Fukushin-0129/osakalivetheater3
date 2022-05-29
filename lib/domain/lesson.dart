@@ -1,6 +1,5 @@
-
 class Lesson {
-  Lesson(this.stage,this.teck);
+  Lesson(this.stage,this.tech);
   String stage;
-  String teck;
+  String tech;
 }
