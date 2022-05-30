@@ -1,8 +1,8 @@
-import 'package:osakalivetheater3/domain/lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:osakalivetheater3/domain/lesson.dart';
 
 
 class LessonListPage extends StatelessWidget {
@@ -17,7 +17,7 @@ class LessonListPage extends StatelessWidget {
         ),
         body: Center(
           child:Consumer<LessonListModel>(builder: (context, model, child) {
-            final List<lesson>? lessons = model.lessons;
+            final List<Lesson>? lessons = model.lessons;
 
             if(lessons == null){
               return CircularProgressIndicator();
