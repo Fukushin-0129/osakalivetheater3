@@ -23,7 +23,7 @@ class AddLessonPage extends StatelessWidget {
                       hintText: 'テクニックの名前',
                     ),
                     onChanged: (text) {
-                     model.tech = text;
+                     model.Tech = text;
                     },
                   ),
                   SizedBox(
@@ -48,17 +48,17 @@ class AddLessonPage extends StatelessWidget {
                         Navigator.of(context).pop(true);
                       }catch(e){
                         final snackBar = SnackBar(
-                          backgroundColors:Colors.green,
-                          content:Text('テクニックを追加しました')),
+                          backgroundColor:Colors.green,
+                          content:Text(e.toString()),
                         );
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
                     child:Text('レッスンを追加する'),
                   ),
                 ],
               ),
-            )
+            );
           }),
         ),
       ),

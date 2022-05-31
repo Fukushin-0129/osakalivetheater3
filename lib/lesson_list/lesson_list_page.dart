@@ -23,7 +23,6 @@ class LessonListPage extends StatelessWidget {
             if(lessons == null){
               return CircularProgressIndicator();
             }
-
             final List<Widget> widgets = lessons
                 .map(
                   (lessons)=>ListTile(
@@ -33,15 +32,15 @@ class LessonListPage extends StatelessWidget {
             )
             .toList();
             return ListView(
-            children: widgets,
-            );
-          }),
-        ),
-        floatingActionButton:
-            StreamBuilder<LessonListModel>(builder:(content.model.child){
-            return FloatingActionButton(
-              onPressed: () async {
-                //画面遷移
+              children: widgets,
+              );
+            }),
+          ),
+          floatingActionButton:
+            Consumer<LessonListModel>(builder:(content,model,child){
+              return FloatingActionButton(
+                onPressed: () async {
+                  //画面遷移
                 final bool? added = await Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -52,13 +51,13 @@ class LessonListPage extends StatelessWidget {
 
                 if(added !=null && added){
                   final snackBar = SnackBar(
-                      backgroundColors:Colors.green,
+                      backgroundColor:Colors.green,
                        content:Text('レッスンを追加しました'),
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar);
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
 
-                model.fetchLuessonList();
+                model.fetchLessonList();
                 },
               tooltip: 'Increment',
               child: Icon(Icons.add),
