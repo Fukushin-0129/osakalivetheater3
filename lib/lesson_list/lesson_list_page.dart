@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osakalivetheater3/add_lesson/add_lesson_page.dart';
 import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,11 +37,33 @@ class LessonListPage extends StatelessWidget {
             );
           }),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: null,
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ),
+        floatingActionButton:
+            StreamBuilder<LessonListModel>(builder:(content.model.child){
+            return FloatingActionButton(
+              onPressed: () async {
+                //画面遷移
+                final bool? added = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddLessonPage(),
+                    fullscreenDialog: true,
+                  ),
+                );
+
+                if(added !=null && added){
+                  final snackBar = SnackBar(
+                      backgroundColors:Colors.green,
+                       content:Text('レッスンを追加しました'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar);
+                }
+
+                model.fetchLuessonList();
+                },
+              tooltip: 'Increment',
+              child: Icon(Icons.add),
+            );
+          }),
       ),
     );
   }
