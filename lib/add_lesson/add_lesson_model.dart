@@ -10,7 +10,7 @@ class AddLessonModel extends ChangeNotifier {
       throw '技術のタイトルが入力されていません';
     }
 
-    if (Stage == null || Stage!.isEmpty)
+    if (Stage == null || Stage!.isEmpty){
       throw 'ステージのタイトルが入力されていません';
     }
 

@@ -19,6 +19,7 @@ class AddLessonPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                    // ignore: prefer_const_constructors
                     decoration: InputDecoration(
                       hintText: 'テクニックの名前',
                     ),
