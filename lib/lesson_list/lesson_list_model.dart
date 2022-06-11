@@ -12,12 +12,17 @@ class LessonListModel extends ChangeNotifier {
     final List<Lesson> lessons = snapshot.docs.map((
         DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      final String id = document.id;
       final String tech = data['tech'];
       final String stage = data['stage'];
-      return Lesson(stage, tech);
+      return Lesson(id,stage, tech);
     }).toList();
 
       this.lessons = lessons;
       notifyListeners();
+  }
+
+  Future delete(Lesson lesson){
+    return FirebaseFirestore.instance.collection('lessons').doc(lesson.id).delete();
   }
 }

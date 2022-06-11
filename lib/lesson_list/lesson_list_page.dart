@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:osakalivetheater3/add_lesson/add_lesson_page.dart';
 import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
 
+import '../edit_lesson/edit_lesson_page.dart';
 
 class LessonListPage extends StatelessWidget {
 
@@ -23,47 +25,125 @@ class LessonListPage extends StatelessWidget {
             if(lessons == null){
               return CircularProgressIndicator();
             }
-            final List<Widget> widgets = lessons
+            final List widgets = lessons
                 .map(
-                  (lessons)=>ListTile(
-                    title:Text(lessons.tech),
-                    subtitle:Text(lessons.stage),
+                  (lessons) => Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                child: ListTile(
+                    title: Text(lessons.tech),
+                    subtitle: Text(lessons.stage),
+                ),
+                  secondaryActions: <Widget>[
+                  IconSlideAction(
+                    caption: '編集',
+                    color: Colors.black45,
+                    icon: Icons.edit,
+                    onTap: () async {
+                      // 編集画面に遷移
+
+                      // 画面遷移
+                      final String? title = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditLessonPage(lessons),
+                        ),
+                      );
+
+                      if (title != null) {
+                        final snackBar = SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text('$titleを編集しました'),
+                        );
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
+                      }
+
+                      model.fetchLessonList();
+                    },
                   ),
+                  IconSlideAction(
+                    caption: '削除',
+                    color: Colors.red,
+                    icon: Icons.delete,
+                    onTap: () async {
+                      // 削除しますか？って聞いて、はいだったら削除
+                      await showConfirmDialog(context, lessons, model);
+                    },
+                  ),
+                ],
+              ),
             )
-            .toList();
+                .toList();
             return ListView(
               children: widgets,
-              );
-            }),
-          ),
-          floatingActionButton:
-            Consumer<LessonListModel>(builder:(content,model,child){
-              return FloatingActionButton(
-                onPressed: () async {
-                  //画面遷移
-                final bool? added = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddLessonPage(),
-                    fullscreenDialog: true,
-                  ),
-                );
-
-                if(added !=null && added){
-                  final snackBar = SnackBar(
-                      backgroundColor:Colors.green,
-                       content:Text('レッスンを追加しました'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-
-                model.fetchLessonList();
-                },
-              tooltip: 'Increment',
-              child: Icon(Icons.add),
             );
           }),
+        ),
+        floatingActionButton:
+        Consumer<LessonListModel>(builder: (context, model, child) {
+          return FloatingActionButton(
+            onPressed: () async {
+              // 画面遷移
+              final bool? added = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddLessonPage(),
+                  fullscreenDialog: true,
+                ),
+              );
+
+              if (added != null && added) {
+                final snackBar = SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text('テクニックを追加しました'),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+
+              model.fetchLessonList();
+            },
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          );
+        }),
       ),
+    );
+  }
+
+  Future showConfirmDialog(
+      BuildContext context,
+      Lesson lesson,
+      LessonListModel model,
+      ) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return AlertDialog(
+          title: Text("削除の確認"),
+          content: Text("『${lesson.tech}』を削除しますか？"),
+          actions: [
+            TextButton(
+              child: Text("いいえ"),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: Text("はい"),
+              onPressed: () async {
+                // modelで削除
+                await model.delete(lesson);
+                Navigator.pop(context);
+                final snackBar = SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('${lesson.tech}を削除しました'),
+                );
+                model.fetchLessonList();
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
