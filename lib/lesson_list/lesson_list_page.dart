@@ -25,7 +25,7 @@ class LessonListPage extends StatelessWidget {
             if(lessons == null){
               return CircularProgressIndicator();
             }
-            final List widgets = lessons
+            final List<Widget> widgets = lessons
                 .map(
                   (lessons) => Slidable(
                 actionPane: SlidableDrawerActionPane(),
@@ -61,7 +61,7 @@ class LessonListPage extends StatelessWidget {
                       model.fetchLessonList();
                     },
                   ),
-                  IconSlideAction(
+                    IconSlideAction(
                     caption: '削除',
                     color: Colors.red,
                     icon: Icons.delete,
