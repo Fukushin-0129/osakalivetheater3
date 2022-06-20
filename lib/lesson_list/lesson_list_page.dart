@@ -106,8 +106,9 @@ class LessonListPage extends StatelessWidget {
     tooltip: 'Increment',
     child: Icon(Icons.add),
           );
-        }),
-       );
+    })
+    ),
+    );
   }
   }
   Future showConfirmDialog(
