@@ -24,7 +24,7 @@ class AddLessonPage extends StatelessWidget {
                       hintText: 'テクニックの名前',
                     ),
                     onChanged: (text) {
-                     model.Tech = text;
+                     model.tech = text;
                     },
                   ),
                   SizedBox(
@@ -35,7 +35,7 @@ class AddLessonPage extends StatelessWidget {
                     hintText: 'ステージ',
                 ),
                   onChanged: (text) {
-                    model.Stage = text;
+                    model.stage = text;
                   },
                 ),
                   SizedBox(
