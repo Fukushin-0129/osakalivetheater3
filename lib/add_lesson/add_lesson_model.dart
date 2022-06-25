@@ -15,7 +15,7 @@ class AddLessonModel extends ChangeNotifier {
     }
 
       //firestoreに追加
-      await FirebaseFirestore.instance.collection('Lessons').add({
+      await FirebaseFirestore.instance.collection('lessons').add({
         'tech': tech,
         'stage': stage,
       });

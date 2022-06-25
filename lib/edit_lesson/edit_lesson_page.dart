@@ -56,12 +56,12 @@ class EditLessonPage extends StatelessWidget {
                         await model.update();
                         Navigator.of(context).pop(true);
                       }catch(e){
-  final snackBar = SnackBar(
-  backgroundColor:Colors.red,
-  content:Text(e.toString()),
-  );
-  ScaffoldMessenger.of(context)
-      .showSnackBar(snackBar);
+                      final snackBar = SnackBar(
+                        backgroundColor:Colors.red,
+                          content:Text(e.toString()),
+                        );
+                      ScaffoldMessenger.of(context)
+                        .showSnackBar(snackBar);
                           }
                         }
                       :null,

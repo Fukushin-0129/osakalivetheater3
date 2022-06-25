@@ -19,40 +19,17 @@ class LessonListPage extends StatelessWidget {
         ),
         body: Center(
           child:Consumer<LessonListModel>(builder: (context, model, child) {
-    final List<lesson>? lessons = model.lessons;
+            final List<lesson>? lessons = model.lessons;
 
-    if(lessons == null){
-    return CircularProgressIndicator();
-    }
-    final List<Widget> widgets = lessons
-        .map(
-    (lessons) =>
-
-    Slidable(
-    endActionPane: ActionPane(
-    motion: DrawerMotion(),
-    children: [
-    SlidableAction(
-    onPressed: (value) async {
-    //画面遷移
-    final String? title = await Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) => EditLessonPage(lessons),
-    ),
-    );
-
-    if (title != null) {
-    final snackBar = SnackBar(
-    backgroundColor: Colors.green,
-    content: Text('$titleを編集しました'),
-    );
-    ScaffoldMessenger.of(context)
-        .showSnackBar(snackBar);
-    }
-
-    model.fetchLessonList();
-    },
+            if(lessons == null){return CircularProgressIndicator();}
+            final List<Widget> widgets = lessons.map((lessons) =>
+                Slidable(endActionPane: ActionPane(motion: DrawerMotion(),
+                  children: [
+                  SlidableAction(onPressed: (value) async {//画面遷移
+                    final String? title = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditLessonPage(lessons),),);
+                    if (title != null) {final snackBar = SnackBar(backgroundColor: Colors.green, content: Text('$titleを編集しました'),);
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);}
+                    model.fetchLessonList();},
     backgroundColor: Colors.black45,
     icon: Icons.edit,
     label: '編集',
