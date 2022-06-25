@@ -19,7 +19,7 @@ class LessonListPage extends StatelessWidget {
         ),
         body: Center(
           child:Consumer<LessonListModel>(builder: (context, model, child) {
-    final List<Lesson>? lessons = model.lessons;
+    final List<lesson>? lessons = model.lessons;
 
     if(lessons == null){
     return CircularProgressIndicator();
@@ -113,7 +113,7 @@ class LessonListPage extends StatelessWidget {
   }
   Future showConfirmDialog(
       BuildContext context,
-      Lesson lesson,
+      lesson lesson,
       LessonListModel model,
       ) {
     return showDialog(

@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
 
 class LessonListModel extends ChangeNotifier {
-  List<Lesson>? lessons;
+  List<lesson>? lessons;
 
   void fetchLessonList() async{
     final QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('lessons').get();
 
-    final List<Lesson> lessons = snapshot.docs.map((
+    final List<lesson> lessons = snapshot.docs.map((
         DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
       final String id = document.id;
       final String tech = data['tech'];
       final String stage = data['stage'];
-      return Lesson(id,stage, tech);
+      return lesson(id,stage, tech);
     }).toList();
 
       this.lessons = lessons;
       notifyListeners();
   }
 
-  Future delete(Lesson lesson){
+  Future delete(lesson lesson){
     return FirebaseFirestore.instance.collection('lessons').doc(lesson.id).delete();
   }
 }

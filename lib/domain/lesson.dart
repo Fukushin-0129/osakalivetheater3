@@ -1,5 +1,5 @@
-class Lesson {
-  Lesson(this.id,this.stage,this.tech);
+class lesson {
+  lesson(this.id,this.stage,this.tech);
 
   String id;
   String stage;

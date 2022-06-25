@@ -6,7 +6,7 @@ import 'package:osakalivetheater3/add_lesson/add_lesson_model.dart';
 import 'edit_lesson_model.dart';
 
 class EditLessonPage extends StatelessWidget {
-  final Lesson lesson;
+  final lesson;
   EditLessonPage(this.lesson);
 
   @override
