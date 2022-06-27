@@ -27,79 +27,81 @@ class LessonListPage extends StatelessWidget {
                   children: [
                   SlidableAction(onPressed: (value) async {//画面遷移
                     final String? title = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditLessonPage(lessons),),);
-                    if (title != null) {final snackBar = SnackBar(backgroundColor: Colors.green, content: Text('$titleを編集しました'),);
+                    if (title != null) {
+                      final snackBar = SnackBar(backgroundColor: Colors.green, content: Text('$titleを編集しました'),);
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);}
                     model.fetchLessonList();},
-    backgroundColor: Colors.black45,
-    icon: Icons.edit,
-    label: '編集',
-    ),
+                    backgroundColor: Colors.black45,
+                     icon: Icons.edit,
+                    label: '編集',
+                    ),
 
+                    SlidableAction(
+                      onPressed: ()async {
+                        // 削除しますか？って聞いて、はいだったら削除
+                        await showConfirmDialog(context, lessons, model);
+                      },
+                        backgroundColor: Colors.red,
+                      icon: Icons.delete,
+                      label: '削除',
+                      ),
+                    ],
+                    ),
 
-    SlidableAction(onPressed: (value) {
-    // 削除しますか？って聞いて、はいだったら削除
-    },
-    backgroundColor: Colors.red,
-    icon: Icons.delete,
-    label: '削除',
-    ),
-    ],
-    ),
-
-    child: ListTile(
-    title: Text(lessons.tech),
-    subtitle: Text(lessons.stage),
-    ) ,
-    ),
-    )
-        .toList();
+                    child: ListTile(
+                        title: Text(lessons.tech),
+                         subtitle: Text(lessons.stage),
+                    ) ,
+                      ),
+                         )
+                  .toList();
                     return ListView(
                     children: widgets,
-    );
-    }),
-        ),
+                    );
+                    }),
+                     ),
 
               floatingActionButton:
               Consumer<LessonListModel>(builder: (context, model, child) {
                  return FloatingActionButton(
-    onPressed: () async {
-    // 画面遷移
-    final bool? added = await Navigator.push(
-    context,
-    MaterialPageRoute(
+                  onPressed: () async {
+                  // 画面遷移
+                   final bool? added = await Navigator.push(
+                  context,
+                     MaterialPageRoute(
                     builder: (context) => AddLessonPage(),
                     fullscreenDialog: true,
-    ),
-    );
-    if (added != null && added) {
-    final snackBar = SnackBar(
-    backgroundColor: Colors.green,
-    content: Text('テクニックを追加しました'),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    ),
+                    );
+                  if (added != null && added) {
+                    final snackBar = SnackBar(
+                    backgroundColor: Colors.green,
+                        content: Text('テクニックを追加しました'),
+                    );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
     model.fetchLessonList();
     },
     tooltip: 'Increment',
-    child: Icon(Icons.add),
+                      child: Icon(Icons.add),
           );
     })
     ),
     );
   }
-  }
+
   Future showConfirmDialog(
-      BuildContext context,
-      lesson lesson,
-      LessonListModel model,
-      ) {
+    BuildContext context,
+    lessons lesson,
+    LessonListModel model,
+    ){
     return showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) {
         return AlertDialog(
           title: Text("削除の確認"),
-          content: Text("『${lesson.tech}』を削除しますか？"),
+          content: Text("『${lesson.title}』を削除しちゃう？"),
           actions: [
             TextButton(
               child: Text("いいえ"),
@@ -107,20 +109,22 @@ class LessonListPage extends StatelessWidget {
             ),
             TextButton(
               child: Text("はい"),
-              onPressed: () async {
-                // modelで削除
+              onPressed: () async{
+                //modelで削除
                 await model.delete(lesson);
                 Navigator.pop(context);
                 final snackBar = SnackBar(
                   backgroundColor: Colors.red,
-                  content: Text('${lesson.tech}を削除しました'),
+                  content: Text('${lesson.title}を削除しました'),
                 );
                 model.fetchLessonList();
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(snackBar);
+                     },
+                    ),
+                  ],
+                );
               },
-            ),
-          ],
-        );
-      },
-    );
-  }
+            );
+          }
+        }

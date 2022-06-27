@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
@@ -22,7 +24,8 @@ class LessonListModel extends ChangeNotifier {
       notifyListeners();
   }
 
-  Future delete(lesson lesson){
+    Future delete(lessons lesson){
     return FirebaseFirestore.instance.collection('lessons').doc(lesson.id).delete();
   }
 }
+
