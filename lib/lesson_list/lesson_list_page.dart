@@ -37,7 +37,7 @@ class LessonListPage extends StatelessWidget {
                     ),
 
                     SlidableAction(
-                      onPressed: ()async {
+                      onPressed: (BuildContext context)async {
                         // 削除しますか？って聞いて、はいだったら削除
                         await showConfirmDialog(context, lessons, model);
                       },
@@ -92,7 +92,7 @@ class LessonListPage extends StatelessWidget {
 
   Future showConfirmDialog(
     BuildContext context,
-    lessons lesson,
+    lesson,
     LessonListModel model,
     ){
     return showDialog(
