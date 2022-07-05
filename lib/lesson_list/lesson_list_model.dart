@@ -1,8 +1,6 @@
-import 'dart:html';
-
+import 'package:osakalivetheater3/domain/lesson.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:osakalivetheater3/domain/lesson.dart';
 
 class LessonListModel extends ChangeNotifier {
   List<lesson>? lessons;

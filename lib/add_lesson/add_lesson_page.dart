@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:osakalivetheater3/add_lesson/add_lesson_model.dart';
 
 class AddLessonPage extends StatelessWidget {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:osakalivetheater3/add_lesson/add_lesson_model.dart';
 import 'edit_lesson_model.dart';
 
 class EditLessonPage extends StatelessWidget {
