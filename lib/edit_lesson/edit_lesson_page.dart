@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'edit_lesson_model.dart';
 
 class EditLessonPage extends StatelessWidget {
-  final lesson;
+  final Lesson lesson;
   EditLessonPage(this.lesson);
 
   @override

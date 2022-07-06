@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
 
 class EditLessonModel extends ChangeNotifier {
-  final lesson;
+  final Lesson lesson;
   EditLessonModel(this.lesson){
     techController.text=lesson.tech;
     stageController.text=lesson.stage;

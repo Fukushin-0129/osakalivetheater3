@@ -18,7 +18,7 @@ class LessonListPage extends StatelessWidget {
         ),
         body: Center(
           child:Consumer<LessonListModel>(builder: (context, model, child) {
-            final List<lesson>? lessons = model.lessons;
+            final List<Lesson>? lessons = model.lessons;
 
             if(lessons == null){return CircularProgressIndicator();}
             final List<Widget> widgets = lessons.map((lessons) =>
