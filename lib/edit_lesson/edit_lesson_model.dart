@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
+import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 
 class EditLessonModel extends ChangeNotifier {
   final Lesson lesson;

@@ -22,7 +22,7 @@ class LessonListModel extends ChangeNotifier {
       notifyListeners();
   }
 
-    Future delete(lesson){
+    Future delete(Lesson lesson){
     return FirebaseFirestore.instance.collection('lessons').doc(lesson.id).delete();
   }
 }
