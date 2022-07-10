@@ -24,7 +24,8 @@ class LessonListPage extends StatelessWidget {
             final List<Widget> widgets = lessons.map((lessons) =>
                 Slidable(endActionPane: ActionPane(motion: DrawerMotion(),
                   children: [
-                  SlidableAction(onPressed: (value) async {//画面遷移
+                  SlidableAction(
+                    onPressed: (value) async {//画面遷移
                     final String? title = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditLessonPage(lessons),),);
                     if (title != null) {
                       final snackBar = SnackBar(backgroundColor: Colors.green, content: Text('$titleを編集しました'),);
@@ -100,7 +101,7 @@ class LessonListPage extends StatelessWidget {
       builder: (_) {
         return AlertDialog(
           title: Text("削除の確認"),
-          content: Text("『${lesson.title}』を削除しちゃう？"),
+          content: Text("『${lesson.tech}』を削除しちゃう？"),
           actions: [
             TextButton(
               child: Text("いいえ"),
@@ -114,7 +115,7 @@ class LessonListPage extends StatelessWidget {
                 Navigator.pop(context);
                 final snackBar = SnackBar(
                   backgroundColor: Colors.red,
-                  content: Text('${lesson.title}を削除しました'),
+                  content: Text('${lesson.tech}を削除しました'),
                 );
                 model.fetchLessonList();
                 ScaffoldMessenger.of(context)

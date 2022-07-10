@@ -26,4 +26,3 @@ class LessonListModel extends ChangeNotifier {
     return FirebaseFirestore.instance.collection('lessons').doc(lesson.id).delete();
   }
 }
-

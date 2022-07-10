@@ -50,10 +50,11 @@ class EditLessonPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: model.isUpdated()
                     ?() async{
-                      //追加の処理
+                      //更新の処理
                       try {
                         await model.update();
-                        Navigator.of(context).pop(true);
+                        Navigator.pop(context);//画面遷移
+//                        Navigator.of(context).pop(true);//画面遷移
                       }catch(e){
                       final snackBar = SnackBar(
                         backgroundColor:Colors.red,
@@ -63,8 +64,8 @@ class EditLessonPage extends StatelessWidget {
                         .showSnackBar(snackBar);
                           }
                         }
-                      :null,
-                    child:Text('更新する'),
+                        :null,
+                    child: Text('更新する'),
                   ),
                 ],
               ),
