@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
-import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
+//import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 import 'package:provider/provider.dart';
 import 'edit_lesson_model.dart';
 

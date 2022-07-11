@@ -75,24 +75,25 @@ class LessonListPage extends StatelessWidget {
                     );
                   if (added != null && added) {
                     final snackBar = SnackBar(
-                    backgroundColor: Colors.green,
+                     backgroundColor: Colors.green,
                         content: Text('テクニックを追加しました'),
                     );
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-    model.fetchLessonList();
-    },
-    tooltip: 'Increment',
+
+                      model.fetchLessonList();
+                        },
+                      tooltip: 'Increment',
                       child: Icon(Icons.add),
-          );
-    })
-    ),
+              );
+         })
+        ),
     );
   }
 
   Future showConfirmDialog(
     BuildContext context,
-    lesson,
+    Lesson lesson,
     LessonListModel model,
     ){
     return showDialog(
@@ -118,8 +119,7 @@ class LessonListPage extends StatelessWidget {
                   content: Text('${lesson.tech}を削除しました'),
                 );
                 model.fetchLessonList();
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(snackBar);
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                      },
                     ),
                   ],
