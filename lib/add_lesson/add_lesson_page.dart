@@ -34,13 +34,25 @@ class AddLessonPage extends StatelessWidget {
                     await model.pickImage();
                       },
                   ),
+                    TextField(
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
+                        hintText: 'テクニックの名前',
+                      ),
+                      onChanged: (text) {
+                        model.tech = text;
+                      },
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
                   TextField(
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
-                      hintText: 'テクニックの名前',
+                      hintText: 'ステージの名前',
                     ),
                     onChanged: (text) {
-                     model.tech = text;
+                     model.stage = text;
                     },
                   ),
                   SizedBox(
