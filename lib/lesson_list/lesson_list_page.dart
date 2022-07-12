@@ -49,6 +49,9 @@ class LessonListPage extends StatelessWidget {
                     ),
 
                     child: ListTile(
+                      leading: lessons.imgURL !=null
+                          ? Image.network(lessons.imgURL!)
+                          :null,
                         title: Text(lessons.tech),
                          subtitle: Text(lessons.stage),
                     ) ,

@@ -15,7 +15,8 @@ class LessonListModel extends ChangeNotifier {
       final String id = document.id;
       final String tech = data['tech'];
       final String stage = data['stage'];
-      return Lesson(id, stage, tech);
+      final String? imgURL = data['imgURL'];
+      return Lesson(id, stage, tech,imgURL);
     }).toList();
 
       this.lessons = lessons;

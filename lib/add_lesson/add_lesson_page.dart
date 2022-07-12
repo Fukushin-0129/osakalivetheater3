@@ -13,10 +13,27 @@ class AddLessonPage extends StatelessWidget {
         ),
         body: Center(
           child:Consumer<AddLessonModel>(builder: (context, model, child) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
+            return Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      child:SizedBox(
+                      width:100,
+                      height: 160,
+                      child:model.imageFile !=null
+                          ? Image.file(model.imageFile!)
+                          :Container(
+                            color: Colors.grey,
+                          ),
+                        ),
+                   onTap: ()async{
+                    print("反応！");
+                    await model.pickImage();
+                      },
+                  ),
                   TextField(
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
@@ -27,37 +44,40 @@ class AddLessonPage extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height: 8,
-                  ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'ステージ',
-                ),
-                  onChanged: (text) {
-                    model.stage = text;
-                  },
-                ),
-                  SizedBox(
                     height: 16,
                   ),
-                ElevatedButton(
-                    onPressed: ()async{
-                      //追加の処理
-                      try {
-                        await model.addLesson();
-                        Navigator.of(context).pop(true);
-                      }catch(e){
-                        final snackBar = SnackBar(
-                          backgroundColor:Colors.green,
-                          content:Text(e.toString()),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      },
-                    child:Text('レッスンを追加する'),
-                  ),
-                ],
+                        ElevatedButton(
+                           onPressed: () async {
+                           // 追加の処理
+                                try {
+                                 model.startLoading();
+                         await model.addLesson();
+                          Navigator.of(context).pop(true);
+                                } catch (e) {
+                                  print(e);
+                                  final snackBar = SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text(e.toString()),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } finally {
+                                  model.endLoading();
+                                }
+                           },
+                          child: Text('追加する'),
+                        ),
+                  ],
+                ),
               ),
+              if (model.isLoading)
+                Container(
+                  color: Colors.black54,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+            ],
             );
           }),
         ),
