@@ -21,8 +21,8 @@ class AddLessonPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       child:SizedBox(
-                      width:100,
-                      height: 160,
+                      width:50,
+                      height: 80,
                       child:model.imageFile !=null
                           ? Image.file(model.imageFile!)
                           :Container(
@@ -30,7 +30,7 @@ class AddLessonPage extends StatelessWidget {
                           ),
                         ),
                    onTap: ()async{
-                    print("反応！");
+                    print("反応！");//エラーの表示
                     await model.pickImage();
                       },
                   ),

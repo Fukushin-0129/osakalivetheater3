@@ -41,10 +41,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>タップシューズの画像のアップロードに利用します</string>
+	<string>レッスンの画像のアップロードに使用します</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires to add file to your camera</string>
 	<key>NSMicrophoneUsageDescription</key>
