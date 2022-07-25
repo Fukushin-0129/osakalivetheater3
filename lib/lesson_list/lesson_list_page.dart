@@ -5,6 +5,7 @@ import 'package:osakalivetheater3/lesson_list/lesson_list_model.dart';
 import 'package:provider/provider.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
 import '../edit_lesson/edit_lesson_page.dart';
+import '../login/login_page.dart';
 
 class LessonListPage extends StatelessWidget {
 
@@ -15,6 +16,20 @@ class LessonListPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('テクニック一覧'),
+          actions: [
+            IconButton(onPressed: ()async{
+              //画面遷移
+               await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                  fullscreenDialog: true,
+                ),
+              );
+              },
+                icon: Icon(Icons.person),
+              ),
+            ],
         ),
         body: Center(
           child:Consumer<LessonListModel>(builder: (context, model, child) {
