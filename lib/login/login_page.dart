@@ -46,18 +46,26 @@ class LoginPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async{
+                      model.startLoading();
+
                       //更新の処理
                       try {
                         await model.signup();
+
+
+
+
                         //Navigator.pop(context);//画面遷移
-//                        Navigator.of(context).pop(true);//画面遷移
+                        Navigator.of(context).pop();//画面遷移
                       }catch(e){
-                        final snackBar = SnackBar(
-                          backgroundColor:Colors.red,
-                          content:Text(e.toString()),
-                        );
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
+                       final snackBar = SnackBar(
+                           backgroundColor:Colors.red,
+                           content:Text(e.toString()),
+                            );
+                       ScaffoldMessenger.of(context)
+                           .showSnackBar(snackBar);
+                      }finally{
+                        model.endLoading();
                       }
                     },
                     child: Text('ログイン'),

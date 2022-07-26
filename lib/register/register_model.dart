@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterModel extends ChangeNotifier {
@@ -7,6 +8,18 @@ class RegisterModel extends ChangeNotifier {
 
   String? email;
   String? password;
+
+  bool isLoading=false;
+
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void endLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
 
   void setEmail(String email){
     this.email = email;//画面上のTechをTechとして認識
@@ -18,17 +31,27 @@ class RegisterModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future signup() async{
+  Future signUp() async{
     this.email=techController.text;
     this.password=stageController.text;
 
-    //firebase authでユーザー作成
 
+    if(email !=null && password !=null){
+      //firebase authでユーザー作成
+      final userCredential =await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email:email!,password:password!);
+      final user=userCredential.user;
 
-    //firestoreに追加
-    //await FirebaseFirestore.instance.collection('lessons').doc(lesson.id).update({
-    //  'tech': email,//画面上のTechをtechとして入力
-    //  'stage': password,//画面上のStageをstageとして入力
-    //});
+      if (user !=null){
+        final uid=user.uid;
+
+        //firestoreに追加
+        final doc =FirebaseFirestore.instance.collection('users').doc(uid);
+        await doc.set({
+          'uid': uid,//画面上のTechをtechとして入力
+          'email': email,//画面上のStageをstageとして入力
+        });
+      }
+    }
   }
 }

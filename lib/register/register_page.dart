@@ -3,7 +3,6 @@ import 'package:osakalivetheater3/register/register_model.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<RegisterModel>(
@@ -14,55 +13,68 @@ class RegisterPage extends StatelessWidget {
         ),
         body: Center(
           child:Consumer<RegisterModel>(builder: (context, model, child) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+            return Stack(
                 children: [
-                  TextField(
-                    controller:model.techController,// ignore: prefer_const_constructors
-                    decoration: InputDecoration(
-                      hintText: 'Eメール',
-                    ),
-                    onChanged: (text) {
-                      model.setEmail(text);
-                    },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:Column(
+              children: [
+                TextField(
+                  controller: model.techController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
                   ),
-                  SizedBox(
-                    height: 8,
+                  onChanged: (text) {
+                    model.setEmail(text);
+                  },
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  controller: model.stageController,
+                  decoration: InputDecoration(
+                    hintText: 'パスワード',
                   ),
-                  TextField(
-                    controller:model.stageController,
-                    // ignore: prefer_const_constructors
-                    decoration: InputDecoration(
-                      hintText: 'パスワード',
-                    ),
-                    onChanged: (text) {
-                      model.setPassword(text);
-                    },
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async{
-                      //更新の処理
-                      try {
-                        await model.signup();
-                        //Navigator.pop(context);//画面遷移
-//                        Navigator.of(context).pop(true);//画面遷移
-                      }catch(e){
-                        final snackBar = SnackBar(
-                          backgroundColor:Colors.red,
-                          content:Text(e.toString()),
-                        );
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(snackBar);
-                      }
-                    },
-                    child: Text('登録する'),
-                  ),
-                ],
+                  onChanged: (text) {
+                    model.setPassword(text);
+                  },
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    model.startLoading();
+
+                    // 追加の処理
+                    try {
+                      await model.signUp();
+                      Navigator.of(context).pop();
+                    } catch (e) {
+                      final snackBar = SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text(e.toString()),
+                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
+                    } finally {
+                      model.endLoading();
+                    }
+                  },
+                  child: Text('登録する'),
+                ),
+              ],
               ),
+            ),
+                  if (model.isLoading)
+                    Container(
+                      color: Colors.black54,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                ],
             );
           }),
         ),

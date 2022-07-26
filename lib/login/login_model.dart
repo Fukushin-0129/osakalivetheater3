@@ -1,4 +1,4 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginModel extends ChangeNotifier {
@@ -7,6 +7,18 @@ class LoginModel extends ChangeNotifier {
 
   String? email;
   String? password;
+
+  bool isLoading=false;
+
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void endLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
 
   void setEmail(String email){
     this.email = email;//画面上のTechをTechとして認識
@@ -22,6 +34,13 @@ class LoginModel extends ChangeNotifier {
     this.email=techController.text;
     this.password=stageController.text;
 
-    //ログイン
- }
+    if (email !=null && password !=null) {
+      //ログイン
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email!, password: password!);
+
+      final currentUser = FirebaseAuth.instance.currentUser;
+      final uid = currentUser!.uid;
+    }
+  }
 }
