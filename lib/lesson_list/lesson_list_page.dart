@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:osakalivetheater3/domain/lesson.dart';
 import '../edit_lesson/edit_lesson_page.dart';
 import '../login/login_page.dart';
+import '../mypage/my_page.dart';
 
 class LessonListPage extends StatelessWidget {
 
@@ -18,16 +19,28 @@ class LessonListPage extends StatelessWidget {
           title: Text('テクニック一覧'),
           actions: [
             IconButton(onPressed: ()async{
-              //画面遷移
-               await Navigator.push(
+      //画面遷移
+                if (firebaseAuth.instance.currentUser !=null){
+                 print('ログインしてる')
+                 await Navigator.push(
+                 context,
+                MaterialPageRoute(
+                  builder: (context) => MyPage(),
+                     fullscreenDialog: true,
+                    ),
+                   );
+                 }else{
+                print('ログインしてない')
+                await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => LoginPage(),
-                  fullscreenDialog: true,
-                ),
-              );
-              },
-                icon: Icon(Icons.person),
+                 fullscreenDialog: true,
+                  ),
+                 );
+                },
+                 }
+                  icon: Icon(Icons.person),
               ),
             ],
         ),
