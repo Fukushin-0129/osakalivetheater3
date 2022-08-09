@@ -6,59 +6,61 @@ import 'my_model.dart';
 class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MyModel>(..fetchUser(),
+    return ChangeNotifierProvider<MyModel>(
+      create: (_) => MyModel()..fetchUser(),
       child: Scaffold(
         appBar: AppBar(
           title: Text('マイページ'),
           actions: [
             Consumer<MyModel>(builder: (context, model, child) {
               return IconButton(
-                onPressed: ()async {
-                 //画面遷移
-                 await Navigator.push(
-                context,
-                 MaterialPageRoute(
-                   builder: (context)=>EditProfilePage(model.name!,model.discription!),
-                   ),
-    );
-    },
-                  icon:Icon(Icon.edit)
-                    );
-                model.fetchUser();
-              }
-            ),
-              ],
-            ),
+                onPressed: () async {
+                  // 画面遷移
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          EditProfilePage(model.name!, model.description!),
+                    ),
+                  );
+                  model.fetchUser();
+                },
+                icon: Icon(Icons.edit),
+              );
+            }),
+          ],
+        ),
         body: Center(
-          child:Consumer<MyModel>(builder: (context, model, child) {
+          child: Consumer<MyModel>(builder: (context, model, child) {
             return Stack(
               children: [
-                Column(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text(
-                        model.email ?? '名前なし'),
-                      style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold
-                       ),
-                       ),
-                      Text(model.email ?? 'メールアドレスなし'),
-                       Text(model.discription ?? '自己紹介なし'),
-                      TextButton(onPressed: ()async{
-                        //ログアウト
-                        await model.logout();
-                        Navigator.of(context).pop();
-                          },
-                        child: Text('ログアウト'),
-                          )
-                        ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        model.name ?? '名前なし',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                   if (model.isLoading)
+                      Text(model.email ?? 'メールアドレスなし'),
+                      Text(
+                        model.description ?? '自己紹介なし',
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          // ログアウト
+                          await model.logout();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('ログアウト'),
+                      )
+                    ],
+                  ),
+                ),
+                if (model.isLoading)
                   Container(
                     color: Colors.black54,
                     child: Center(

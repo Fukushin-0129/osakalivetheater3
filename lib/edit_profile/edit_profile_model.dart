@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:osakalivetheater3/domain/lesson.dart';
 
 class EditProfileModel extends ChangeNotifier {
-  EditProfilePage(this.name,this discription){
+  EditProfileModel(this.name,this.discription){
   nameController.text=name!;
   discriptionController.text=discription!;
   }

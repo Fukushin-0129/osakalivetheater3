@@ -3,14 +3,15 @@ import 'package:osakalivetheater3/edit_profile/edit_profile_model.dart';
 import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatelessWidget {
-  EditProfilePage(this.name,this discription)
+  EditProfilePage(this.name,this.discription);
   final String name;
   final String discription;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<EditProfileModel>(
-      create: (_) => EditProfileModel(name,discription,)
+      create: (_) => EditProfileModel(name,discription,
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: Text('プロフィールを編集'),
@@ -53,7 +54,7 @@ class EditProfilePage extends StatelessWidget {
                       //更新の処理
                       try {
                         await model.update();
-                        Navigator.pop();//画面遷移
+                        Navigator.of(context).pop();//画面遷移
                       }catch(e){
                         final snackBar = SnackBar(
                           backgroundColor:Colors.red,

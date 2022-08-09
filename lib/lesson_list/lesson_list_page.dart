@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:osakalivetheater3/add_lesson/add_lesson_page.dart';
@@ -20,8 +21,8 @@ class LessonListPage extends StatelessWidget {
           actions: [
             IconButton(onPressed: ()async{
       //画面遷移
-                if (firebaseAuth.instance.currentUser !=null){
-                 print('ログインしてる')
+                if (FirebaseAuth.instance.currentUser !=null){
+                 print('ログインしてる');
                  await Navigator.push(
                  context,
                 MaterialPageRoute(
@@ -30,7 +31,7 @@ class LessonListPage extends StatelessWidget {
                     ),
                    );
                  }else{
-                print('ログインしてない')
+                print('ログインしてない');
                 await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -38,8 +39,8 @@ class LessonListPage extends StatelessWidget {
                  fullscreenDialog: true,
                   ),
                  );
-                },
                  }
+                 },
                   icon: Icon(Icons.person),
               ),
             ],

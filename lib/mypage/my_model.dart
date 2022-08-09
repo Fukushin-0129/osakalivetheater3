@@ -3,11 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyModel extends ChangeNotifier {
-
-  bool isLoading=false;
+  bool isLoading = false;
   String? name;
   String? email;
-  String? discription;
+  String? description;
 
   void startLoading() {
     isLoading = true;
@@ -19,16 +18,16 @@ class MyModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void fetchUser() async {
+    final user = FirebaseAuth.instance.currentUser;
+    this.email = user?.email;
 
-  void fetchUser(){
-    final user=FirebaseAuth.instance.currentUser;
-    this email=user?.email;
-
-    final uid=FirebaseAuth.instance.currentUser!.uid;
-    final snapshot= await FirebaseFirestore.instance.collection('users').doc(uid).get();
-    final data=snapshot.data();
-    this name=data?['name'];
-    this discription=data?['discription'];
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final snapshot =
+    await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    final data = snapshot.data();
+    this.name = data?['name'];
+    this.description = data?['description'];
 
     notifyListeners();
   }
